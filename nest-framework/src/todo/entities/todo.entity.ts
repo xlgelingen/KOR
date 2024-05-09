@@ -1,21 +1,20 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-// 指定实体映射到数据库中的表名为 'users'
-@Entity('users')
-export class UsersEntity {
+@Entity('todos')
+export class TodosEntity {
   @PrimaryGeneratedColumn()
   id: number; // 标记为主列，值自动生成
 
   @Column()
-  user_name: string;
+  content: string;
 
   @Column()
-  password: string;
+  isCompleted: boolean;
 
   //创建时间列，默认值为当前时间戳
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   create_time: Date;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  update_time: Date;
+  @Column({ type: 'timestamp', nullable: true })
+  completed_time: Date;
 }

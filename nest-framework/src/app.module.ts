@@ -4,10 +4,13 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { PostsModule } from './posts/posts.module';
-import { TodoModule } from './todo/todo.module';
 import { ormConfig } from './config/db.config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { ObjectiveModule } from './objective/objective.module';
+import { KeyresultModule } from './keyresult/keyresult.module';
+import { TodoModule } from './todo/todo.module';
+import { TodoKeyresultModule } from './todo_keyresult/todo_keyresult.module';
 
 @Module({
   imports: [
@@ -19,9 +22,12 @@ import { UserModule } from './user/user.module';
       autoLoadEntities: true, //通过 forFeature() 方法注册的每个实体都将自动添加到配置对象的 entities 数组中。
     }),
     PostsModule,
-    TodoModule,
     AuthModule,
     UserModule,
+    ObjectiveModule,
+    KeyresultModule,
+    TodoModule,
+    TodoKeyresultModule,
   ],
   controllers: [AppController],
   providers: [AppService],
