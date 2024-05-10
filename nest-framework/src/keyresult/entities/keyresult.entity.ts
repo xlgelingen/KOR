@@ -18,6 +18,7 @@ export class KeyresultsEntity {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   create_time: Date;
 
+  //完成时间，可以为null，即可以不填
   @Column({ type: 'timestamp', nullable: true })
   completed_time: Date;
 }

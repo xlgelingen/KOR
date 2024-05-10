@@ -16,7 +16,7 @@ export class ObjectiveService {
     objective: Partial<CreateObjectiveDto>,
   ): Promise<ObjectivesEntity> {
     if (!objective.content) {
-      throw new HttpException('缺少目标内容', 401);
+      throw new HttpException('缺少目标内容', HttpStatus.BAD_REQUEST);
     }
     return await this.objectiveRepository.save(objective);
   }
@@ -44,7 +44,7 @@ export class ObjectiveService {
   async remove(id: number) {
     const existPost = await this.objectiveRepository.findOne({ where: { id } });
     if (!existPost) {
-      throw new HttpException(`id为${id}的目标不存在`, 401);
+      throw new HttpException(`id为${id}的目标不存在`, HttpStatus.BAD_REQUEST);
     }
     return await this.objectiveRepository.remove(existPost);
   }

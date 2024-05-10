@@ -1,26 +1,55 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateKeyresultDto } from './dto/create-keyresult.dto';
 import { UpdateKeyresultDto } from './dto/update-keyresult.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { KeyresultsEntity } from './entities/keyresult.entity';
 
 @Injectable()
 export class KeyresultService {
-  create(createKeyresultDto: CreateKeyresultDto) {
-    return 'This action adds a new keyresult';
+  constructor(
+    @InjectRepository(KeyresultsEntity)
+    private readonly keyresultRepository: Repository<KeyresultsEntity>,
+  ) {}
+
+  async create(
+    objective: Partial<CreateKeyresultDto>,
+  ): Promise<KeyresultsEntity> {
+    if (!objective.content || !objective.objId) {
+      throw new HttpException('缺少内容', HttpStatus.BAD_REQUEST);
+    }
+    return await this.keyresultRepository.save(objective);
   }
 
-  findAll() {
-    return `This action returns all keyresult`;
+  async findAll() {
+    return this.keyresultRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} keyresult`;
+  async findById(id: number) {
+    return await this.keyresultRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateKeyresultDto: UpdateKeyresultDto) {
-    return `This action updates a #${id} keyresult`;
+  async findByObjId(objId: number) {
+    return await this.keyresultRepository.find({ where: { objId } });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} keyresult`;
+  async update(id: number, updateObjective: Partial<UpdateKeyresultDto>) {
+    const existPost = await this.keyresultRepository.findOne({ where: { id } });
+    if (!existPost) {
+      throw new HttpException(`id为${id}的目标不存在`, HttpStatus.NOT_FOUND);
+    }
+    const updatePost = this.keyresultRepository.merge(
+      existPost,
+      updateObjective,
+    );
+    return this.keyresultRepository.save(updatePost);
+  }
+
+  async remove(id: number) {
+    const existPost = await this.keyresultRepository.findOne({ where: { id } });
+    if (!existPost) {
+      throw new HttpException(`id为${id}的目标不存在`, HttpStatus.BAD_REQUEST);
+    }
+    return await this.keyresultRepository.remove(existPost);
   }
 }

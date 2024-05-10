@@ -15,25 +15,31 @@ import { UpdateKeyresultDto } from './dto/update-keyresult.dto';
 export class KeyresultController {
   constructor(private readonly keyresultService: KeyresultService) {}
 
-  @Post()
-  create(@Body() createKeyresultDto: CreateKeyresultDto) {
-    return this.keyresultService.create(createKeyresultDto);
-  }
-
   @Get()
   findAll() {
     return this.keyresultService.findAll();
   }
 
+  @Post()
+  create(@Body() createKeyresultDto: Partial<CreateKeyresultDto>) {
+    return this.keyresultService.create(createKeyresultDto);
+  }
+
+  @Post('select')
+  slecet(@Body() post) {
+    const objId = post.objId;
+    return this.keyresultService.findByObjId(+objId);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.keyresultService.findOne(+id);
+    return this.keyresultService.findById(+id);
   }
 
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updateKeyresultDto: UpdateKeyresultDto,
+    @Body() updateKeyresultDto: Partial<UpdateKeyresultDto>,
   ) {
     return this.keyresultService.update(+id, updateKeyresultDto);
   }
