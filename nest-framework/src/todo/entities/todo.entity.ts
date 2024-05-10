@@ -8,7 +8,7 @@ export class TodosEntity {
   @Column()
   content: string;
 
-  @Column()
+  @Column({ default: () => false })
   isCompleted: boolean;
 
   //创建时间列，默认值为当前时间戳

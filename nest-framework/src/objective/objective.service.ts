@@ -41,6 +41,15 @@ export class ObjectiveService {
     return this.objectiveRepository.save(updatePost);
   }
 
+  async setCompleted(id: number) {
+    const existPost = await this.objectiveRepository.findOne({ where: { id } });
+    if (!existPost) {
+      throw new HttpException(`id为${id}的目标不存在`, HttpStatus.NOT_FOUND);
+    }
+    existPost.isCompleted = true;
+    return await this.objectiveRepository.save(existPost);
+  }
+
   async remove(id: number) {
     const existPost = await this.objectiveRepository.findOne({ where: { id } });
     if (!existPost) {

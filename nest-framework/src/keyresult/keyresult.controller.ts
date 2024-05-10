@@ -44,6 +44,11 @@ export class KeyresultController {
     return this.keyresultService.update(+id, updateKeyresultDto);
   }
 
+  @Patch('complete/:id')
+  setCompleted(@Param('id') id: string) {
+    return this.keyresultService.setCompleted(+id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.keyresultService.remove(+id);

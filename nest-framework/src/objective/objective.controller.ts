@@ -38,6 +38,11 @@ export class ObjectiveController {
     return this.objectiveService.update(+id, updateObjectiveDto);
   }
 
+  @Patch('complete/:id')
+  setCompleted(@Param('id') id: string) {
+    return this.objectiveService.setCompleted(+id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.objectiveService.remove(+id);

@@ -1,1 +1,4 @@
-export class CreateTodoDto {}
+export class CreateTodoDto {
+  readonly content?: string;
+  readonly isCompleted?: boolean;
+}

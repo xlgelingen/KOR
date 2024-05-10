@@ -10,11 +10,6 @@ import { ConfigService, ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     UserModule,
-    // JwtModule.register({
-    //   global: true,
-    //   secret: process.env.JWT_SECRET,
-    //   signOptions: { expiresIn: '60d' },
-    // }),
     ConfigModule.forRoot(), // 配置 ConfigModule
     JwtModule.registerAsync({
       imports: [ConfigModule], // 导入 ConfigModule
