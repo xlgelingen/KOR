@@ -1,26 +1,51 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateObjectiveDto } from './dto/create-objective.dto';
 import { UpdateObjectiveDto } from './dto/update-objective.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { ObjectivesEntity } from './entities/objective.entity';
 
 @Injectable()
 export class ObjectiveService {
-  create(createObjectiveDto: CreateObjectiveDto) {
-    return 'This action adds a new objective';
+  constructor(
+    @InjectRepository(ObjectivesEntity)
+    private readonly objectiveRepository: Repository<ObjectivesEntity>,
+  ) {}
+
+  async create(
+    objective: Partial<CreateObjectiveDto>,
+  ): Promise<ObjectivesEntity> {
+    if (!objective.content) {
+      throw new HttpException('缺少目标内容', 401);
+    }
+    return await this.objectiveRepository.save(objective);
   }
 
-  findAll() {
-    return `This action returns all objective`;
+  async findAll() {
+    return this.objectiveRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} objective`;
+  async findById(id: number) {
+    return await this.objectiveRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateObjectiveDto: UpdateObjectiveDto) {
-    return `This action updates a #${id} objective`;
+  async update(id: number, updateObjective: Partial<UpdateObjectiveDto>) {
+    const existPost = await this.objectiveRepository.findOne({ where: { id } });
+    if (!existPost) {
+      throw new HttpException(`id为${id}的目标不存在`, HttpStatus.NOT_FOUND);
+    }
+    const updatePost = this.objectiveRepository.merge(
+      existPost,
+      updateObjective,
+    );
+    return this.objectiveRepository.save(updatePost);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} objective`;
+  async remove(id: number) {
+    const existPost = await this.objectiveRepository.findOne({ where: { id } });
+    if (!existPost) {
+      throw new HttpException(`id为${id}的目标不存在`, 401);
+    }
+    return await this.objectiveRepository.remove(existPost);
   }
 }

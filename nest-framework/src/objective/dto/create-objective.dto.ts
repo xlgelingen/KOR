@@ -1,1 +1,4 @@
-export class CreateObjectiveDto {}
+export class CreateObjectiveDto {
+  readonly content: string;
+  readonly isCompleted: boolean;
+}

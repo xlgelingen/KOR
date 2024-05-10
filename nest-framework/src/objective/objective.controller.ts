@@ -16,7 +16,7 @@ export class ObjectiveController {
   constructor(private readonly objectiveService: ObjectiveService) {}
 
   @Post()
-  create(@Body() createObjectiveDto: CreateObjectiveDto) {
+  create(@Body() createObjectiveDto: Partial<CreateObjectiveDto>) {
     return this.objectiveService.create(createObjectiveDto);
   }
 
@@ -27,13 +27,13 @@ export class ObjectiveController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.objectiveService.findOne(+id);
+    return this.objectiveService.findById(+id);
   }
 
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updateObjectiveDto: UpdateObjectiveDto,
+    @Body() updateObjectiveDto: Partial<UpdateObjectiveDto>,
   ) {
     return this.objectiveService.update(+id, updateObjectiveDto);
   }
