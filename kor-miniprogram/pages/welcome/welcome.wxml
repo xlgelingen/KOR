@@ -1,5 +1,9 @@
 <!--index.wxml-->
 <import src="/template/topics/topics"/>
 <scroll-view class="scrollarea" scroll-y type="list">
-  111
+  <view class="page-container">
+  <view>目标和关键成果</view>
+  <view>Objective and Key Result</view>
+  <button bindtap="goTodo">立即体验</button>
+  </view>
 </scroll-view>
