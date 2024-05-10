@@ -1,0 +1,7 @@
+<!--topics.wxml-->
+<import src="/template/topics/topics"/>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="page-container">
+    <template is="topics" data="{{topics}}"/>
+  </view>
+</scroll-view>

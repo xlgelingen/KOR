@@ -1,0 +1,18 @@
+<!--show.wxml-->
+<import src="/template/topics/topics" />
+
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="page-container">
+    <view class="topics-container">
+      <view class="topics-userInfo">
+        <image class="topics-userInfo-avatar" src="{{topic.member.avatar_normal}}"></image>
+        <view class="topics-userInfo-username">{{topic.member.username}}</view>
+      </view>
+      <view class="topics-content">
+        <view class="topics-title">{{topic.title}}</view>
+        <view class="topics-description">{{topic.content}}</view>
+      </view>
+    </view>
+    <template is="replies" data="{{replies}}" />
+  </view>
+</scroll-view>

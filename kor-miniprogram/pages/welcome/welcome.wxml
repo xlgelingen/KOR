@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<import src="/template/topics/topics"/>
+<scroll-view class="scrollarea" scroll-y type="list">
+  111
+</scroll-view>

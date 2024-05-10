@@ -1,0 +1,49 @@
+/**show.wxss**/
+.scrollarea {
+  height: 100%;
+  flex: 1;
+  overflow-y: hidden;
+}
+.page-container {
+  background-color: #f5f5f5;
+} 
+
+.topics-container{
+  padding: 30rpx;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.topics-userInfo {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.topics-userInfo .topics-userInfo-avatar{
+  flex: none;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 4px;
+  margin-right: 8px;
+  background-color: #f5f5f5;
+}
+
+.topics-userInfo .topics-userInfo-username{
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  align-items: flex-end;
+}
+
+.topics-content .topics-title{
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.topics-content .topics-description{
+  font-size: 14px;
+  color: #666;
+  text-align: justify;
+}
+
