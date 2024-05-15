@@ -10,7 +10,7 @@ const baseConfig: DataSourceOptions = {
   port: configService.get<number>('DB_PORT', 3306), // 端口号
   username: configService.get('DB_USERNAME', 'root'), // 用户名
   password: configService.get('DB_PASSWORD', 'root'), // 密码
-  database: configService.get('DB_DATABASE', 'nestjs'), //数据库名
+  database: configService.get('DB_DATABASE', 'nest-okr'), //数据库名
 };
 
 // 该对象用于 nestjs typeorm 初始化
