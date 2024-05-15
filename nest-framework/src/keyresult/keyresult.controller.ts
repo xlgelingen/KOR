@@ -24,6 +24,10 @@ export class KeyresultController {
   create(@Body() createKeyresultDto: Partial<CreateKeyresultDto>) {
     return this.keyresultService.create(createKeyresultDto);
   }
+  // @Post()
+  // create(@Body() createTodoKeyresultDto: CreateTodoKeyresultDto) {
+  //   return this.todoKeyresultService.create(createTodoKeyresultDto);
+  // }
 
   @Post('select')
   slecet(@Body() post) {
@@ -32,8 +36,13 @@ export class KeyresultController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findById(@Param('id') id: string) {
     return this.keyresultService.findById(+id);
+  }
+
+  @Get('objId/:id')
+  findByObjId(@Param('id') id: string) {
+    return this.keyresultService.findByObjId(+id);
   }
 
   @Patch(':id')
@@ -49,8 +58,13 @@ export class KeyresultController {
     return this.keyresultService.setCompleted(+id);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.keyresultService.remove(+id);
+  // @Delete(':id')
+  // removeById(@Param('id') id: string) {
+  //   return this.keyresultService.remove(+id);
+  // }
+
+  @Delete()
+  remove(@Body() post: CreateKeyresultDto) {
+    return this.keyresultService.remove(post);
   }
 }

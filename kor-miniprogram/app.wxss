@@ -3,16 +3,24 @@
 
 page {
   height: 100vh;
- /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  /* justify-content: space-between;
-  padding: 200rpx 0; */
   font-size: 16px;
   line-height: 1.6;
   font-family: Arial;
   box-sizing: border-box;
 }
 .page-container {
-  height: 100%;
+  min-height: 100%;
+  padding: 60rpx 30rpx;
+}
+.content-title{
+  font-size: 14px;
+  color: #666;
+}
+.input-assemblies{
+  border: 2px solid #666;
+  padding: 8px;
+  box-sizing: border-box;
+  height: fit-content;
+  margin: 20rpx 0 40rpx;
+  /* width: 80%; */
 } 

@@ -13,8 +13,8 @@ export class TodoKeyresultController {
   }
 
   @Post()
-  create(@Body() createTodoKeyresultDto: CreateTodoKeyresultDto) {
-    return this.todoKeyresultService.create(createTodoKeyresultDto);
+  createByArr(@Body() createTodoKeyresultDto: CreateTodoKeyresultDto) {
+    return this.todoKeyresultService.createByArr(createTodoKeyresultDto);
   }
 
   @Post('select')

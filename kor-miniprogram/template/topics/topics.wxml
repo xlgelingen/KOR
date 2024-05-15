@@ -1,21 +1,29 @@
 <!--topics.wxml-->
 <template name="topics">
-  <navigator class="topics-item" wx:for="{{topics}}" wx:key="unique" url="/pages/show/show?id={{item.id}}">
-    <image class="topics-avatar" src="{{item.member.avatar_normal}}" />
-    <view class="topics-content">
-      <view class="topics-username">{{item.member.username}}</view>
-      <view class="topics-title">{{item.title}}</view>
+  <view class="topics-item" wx:for="{{topics}}" wx:key="unique" wx:if="{{!item.isCompleted}}" bindtap="operateDialog" data-item-id="{{item.id}}">
+    <view class="item-title">{{item.content}}</view>
+    <view class="item-time">• 创建时间：{{item.create_time}}
     </view>
-  </navigator>
-</template>
-
-<template name="replies">
-  <view class="topics-item" wx:for="{{replies}}" wx:key="unique" url="/pages/show/show?id={{item.id}}">
-    <image class="topics-avatar" src="{{item.member.avatar_normal}}" />
-    <view class="topics-content">
-      <view class="topics-username">{{item.member.username}}</view>
-      <view class="topics-title">{{item.content}}</view>
-    </view>
+    <view class="item-time" wx:if="{{item.completed_time}}">• 完成时间：{{item.completed_time}}</view>
   </view>
 </template>
 
+<template name="topics-done">
+  <view class="topics-item" wx:for="{{topics}}" wx:key="unique" wx:if="{{item.isCompleted}}" data-item-id="{{item.id}}">
+    <view class="item-title">{{item.content}}</view>
+    <view class="item-time">• 创建时间：{{item.create_time}}
+    </view>
+    <view class="item-time" wx:if="{{item.completed_time}}">• 完成时间：{{item.completed_time}}</view>
+    <image src="/images/done.svg" class="done-logo" />
+  </view>
+</template>
+
+<template name="topics-all">
+  <view class="topics-item" wx:for="{{topics}}" wx:key="unique" bindtap="operateDialog" data-item-id="{{item.id}}" data-item-complete="{{item.completed_time ? true : false}}">
+    <view class="item-title">{{item.content}}</view>
+    <view class="item-time">• 创建时间：{{item.create_time}}
+    </view>
+    <view class="item-time" wx:if="{{item.completed_time}}">• 完成时间：{{item.completed_time}}</view>
+    <image src="/images/done.svg" class="done-logo" wx:if="{{item.completed_time}}"/>
+  </view>
+</template>

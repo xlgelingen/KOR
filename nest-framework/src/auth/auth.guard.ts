@@ -17,22 +17,22 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    console.log('守卫/IS_PUBLIC_KEY前', IS_PUBLIC_KEY);
+    // console.log('守卫/IS_PUBLIC_KEY前', IS_PUBLIC_KEY);
     //获取指定元数据键（IS_PUBLIC_KEY）在给定上下文所属的类或处理器的方法中的值，并赋值给isPublic
     //有@Public的方法或控制器类，就能给isPublic赋值true，没有的isPublic就是undefind
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
-    console.log('守卫/IS_PUBLIC_KEY后', IS_PUBLIC_KEY);
-    console.log('守卫/isPublic后', isPublic);
+    // console.log('守卫/IS_PUBLIC_KEY后', IS_PUBLIC_KEY);
+    // console.log('守卫/isPublic后', isPublic);
     if (isPublic) {
       return true;
     }
 
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
-    // console.log('守卫/token', token);
+    console.log('守卫/token', token);
 
     if (!token) {
       throw new UnauthorizedException();

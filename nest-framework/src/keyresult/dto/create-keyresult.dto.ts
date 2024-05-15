@@ -1,5 +1,7 @@
 export class CreateKeyresultDto {
-  readonly objId: number;
-  readonly content: string;
+  readonly id?: number;
+  readonly objId?: number;
+  readonly content?: string;
+  readonly keyresults?: Array<any>;
   readonly isCompleted?: boolean;
 }

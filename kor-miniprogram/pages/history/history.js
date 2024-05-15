@@ -1,21 +1,33 @@
 /**node.js**/
+var app = getApp();
 Page({
-  data:{
-    nodes:[],
+  data: {
+    token: "1",
+    topics: [],
   },
-  onLoad:function(options){
+  onLoad: function (options) {
+    this.setData({
+      token: app.globalData.token
+    });
     this.getData();
   },
-  getData:function(){
-    // wx.request({
-    //   url: 'https://www.v2ex.com/api/nodes/all.json',
-    //   success:(res)=>{
-    //     console.log('标签/res',res);
-    //     this.setData({
-    //       nodes: res.data
-    //     })
-    //   }
-    // })
-  }
+  getData: function () {
+    // console.log('getData/todo', this.data.token);
+    wx.request({
+      url: 'http://127.0.0.1:3000/todo',
+      header: {
+        'Authorization': `Bearer ${this.data.token}`,
+      },
+      success: (res) => {
+        console.log('getData/res', res.data)
+        this.setData({
+          topics: res.data.data
+        })
+      },
+      fail: (error) => {
+        console.error(error);
+      }
+    })
+  },
 })
 

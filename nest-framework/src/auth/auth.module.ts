@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../user/user.module';
@@ -9,6 +10,7 @@ import { ConfigService, ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    HttpModule,
     UserModule,
     ConfigModule.forRoot(), // 配置 ConfigModule
     JwtModule.registerAsync({

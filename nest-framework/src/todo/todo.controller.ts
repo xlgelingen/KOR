@@ -25,10 +25,10 @@ export class TodoController {
     return this.todoService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.todoService.findById(+id);
-  // }
+  @Get(':id')
+  findById(@Param('id') id: string) {
+    return this.todoService.findById(+id);
+  }
 
   @Patch('complete/:id')
   setCompleted(@Param('id') id: string) {
