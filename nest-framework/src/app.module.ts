@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { PostsModule } from './posts/posts.module';
 import { ormConfig } from './config/db.config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
@@ -21,7 +20,6 @@ import { TodoKeyresultModule } from './todo_keyresult/todo_keyresult.module';
       synchronize: true, //根据实体自动创建数据库表， 生产环境建议关闭,否则会丢失生产数据。
       autoLoadEntities: true, //通过 forFeature() 方法注册的每个实体都将自动添加到配置对象的 entities 数组中。
     }),
-    PostsModule,
     AuthModule,
     UserModule,
     ObjectiveModule,
