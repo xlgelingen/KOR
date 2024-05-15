@@ -8,14 +8,15 @@ App({
   },
   // 登录检测：token
   checkLogin() {
-    console.log('登录检测：token')
     //全局变量或缓存中存在token，直接赋值，否则重新登录
     var token = this.globalData.token
     if (!token) {
       token = wx.getStorageSync('token')
       if (token) {
+        console.log('登录检测：设置token')
         this.globalData.token = token;
       } else {
+        console.log('登录检测：调用login')
         this.login();
       }
     }

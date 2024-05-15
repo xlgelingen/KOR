@@ -11,6 +11,9 @@ Page({
     });
     this.getData();
   },
+  onShow: async function (options) {
+    this.getData();
+  },
   getData: function () {
     // console.log('getData/todo', this.data.token);
     wx.request({
